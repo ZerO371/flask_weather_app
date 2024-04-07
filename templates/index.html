@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Search</title>
+<style>
+    .container {
+        text-align: center;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <form id="searchForm">
+        <input type="text" id="keyword" name="keyword" placeholder="Enter a keyword">
+        <button type="submit">Search</button>
+    </form>
+    <div id="imageResult"></div>
+</div>
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const keyword = document.getElementById('keyword').value;
+        fetch('/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({keyword: keyword})
+        })
+        .then(response => response.json())
+        .then(data => {
+            const imageResult = document.getElementById('imageResult');
+            imageResult.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = `data:image/png;base64,${data.base64Image}`;
+            imageResult.appendChild(img);
+        });
+    });
+</script>
+</body>
+</html>
