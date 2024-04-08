@@ -1,8 +1,12 @@
 # flask_weather_app
 This is a weather app
-
 python 3.10.14
 
-Use python3 app.py
+python3 app.py
 
-app runs at: https://0.0.0.0/443
+runs at: https://0.0.0.0/443
+
+
+时间仓促，有很多地方可以改善
+
+如：后端的异常处理，接收前端参数验证，生成https证书（自签），前端弹窗提示等
